@@ -4,7 +4,7 @@ const canvas = document.createElement('canvas');
 const context = canvas.getContext('2d');
 const width = 500;
 const height = 700;
-const screenWidth = window.screen.width;
+const screenWidth = body.clientWidth;
 const canvasPosition = screenWidth / 2 - width / 2;
 const isMobile = window.matchMedia('(max-width: 600px)');
 const gameOverEl = document.createElement('div');
@@ -74,7 +74,7 @@ function renderCanvas() {
   // Score
   context.font = '32px Courier New';
   context.fillText(playerScore, 20, canvas.height / 2 + 50);
-  context.fillText(computerScore, 20, canvas.height / 2 - 30);
+  context.fillText(computerScore, 20, canvas.height / 2 - 50);
 }
 
 // Create Canvas Element
@@ -200,6 +200,7 @@ function animate() {
   ballMove();
   ballBoundaries();
   computerAI();
+  window.requestAnimationFrame(animate);
 }
 
 // Start Game, Reset Everything
@@ -231,4 +232,4 @@ function startGame() {
 }
 
 // On Load
-// startGame();
+startGame();
