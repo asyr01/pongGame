@@ -67,14 +67,14 @@ function renderCanvas() {
   context.strokeStyle = 'red';
   context.stroke();
   // Ball
-  // context.beginPath();
-  // context.arc(ballX, ballY, ballRadius, 2 * Math.PI, false);
-  // context.fillStyle = 'white';
-  // context.fill();
+  context.beginPath();
+  context.arc(ballX, ballY, ballRadius, 2 * Math.PI, false);
+  context.fillStyle = 'cyan';
+  context.fill();
   // Score
-  // context.font = '32px Courier New';
-  // context.fillText(playerScore, 20, canvas.height / 2 + 50);
-  // context.fillText(computerScore, 20, canvas.height / 2 - 30);
+  context.font = '32px Courier New';
+  context.fillText(playerScore, 20, canvas.height / 2 + 50);
+  context.fillText(computerScore, 20, canvas.height / 2 - 30);
 }
 
 // Create Canvas Element
