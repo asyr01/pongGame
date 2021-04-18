@@ -53,18 +53,19 @@ function renderCanvas() {
   context.fillStyle = 'black';
   context.fillRect(0, 0, width, height);
   // Paddle Color
-  context.fillStyle = 'white';
+  context.fillStyle = 'blue';
   // Player Paddle (Bottom)
   context.fillRect(paddleBottomX, height - 20, paddleWidth, paddleHeight);
   // Computer Paddle (Top)
-  // context.fillRect(paddleTopX, 10, paddleWidth, paddleHeight);
+  context.fillStyle = 'pink';
+  context.fillRect(paddleTopX, 10, paddleWidth, paddleHeight);
   // Dashed Center Line
-  // context.beginPath();
-  // context.setLineDash([4]);
-  // context.moveTo(0, 350);
-  // context.lineTo(500, 350);
-  // context.strokeStyle = 'grey';
-  // context.stroke();
+  context.beginPath();
+  context.setLineDash([4]);
+  context.moveTo(0, 350);
+  context.lineTo(500, 350);
+  context.strokeStyle = 'red';
+  context.stroke();
   // Ball
   // context.beginPath();
   // context.arc(ballX, ballY, ballRadius, 2 * Math.PI, false);
