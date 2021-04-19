@@ -43,10 +43,10 @@ if (isMobile.matches) {
 }
 
 // Score
-let playerName;
+let playerName = 'Player';
 let playerScore = 0;
 let computerScore = 0;
-const winningScore = 5;
+const winningScore = 1;
 let isGameOver = true;
 let isNewGame = true;
 
@@ -205,13 +205,12 @@ function showWelcomeEl() {
     'Welcome to the most attractive pong game ever! (!) :)';
   // Info
   playerInfo.classList.add('container');
-  const playerNameLabel = document.createElement('label');
-  playerNameLabel.setAttribute('for', 'name');
+  const playerNameLabel = document.createElement('p');
   playerNameLabel.textContent = 'What is your name ?';
   const playerNameInput = document.createElement('input');
   playerNameInput.setAttribute('type', 'text');
-  playerNameInput.setAttribute('onchange', 'setName()');
   playerNameInput.id = 'name-input';
+  playerNameInput.setAttribute('onchange', 'setName()');
 
   // Start Game Button
   const startGameButton = document.createElement('button');
@@ -230,12 +229,7 @@ function gameOver() {
   if (playerScore === winningScore || computerScore === winningScore) {
     isGameOver = true;
     // Set Winner
-    const winner =
-      playerScore === winningScore
-        ? playerName
-          ? `${playerName}`
-          : 'Player'
-        : 'Computer';
+    const winner = playerScore === winningScore ? playerName : 'Computer';
     showGameOverEl(winner);
   }
 }
