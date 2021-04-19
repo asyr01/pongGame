@@ -171,17 +171,20 @@ function computerAI() {
 
 function showGameOverEl(winner) {
   // Hide Canvas
-  // // Container
-  // gameOverEl.textContent = '';
-  // gameOverEl.classList.add('game-over-container');
-  // // Title
-  // const title = document.createElement('h1');
-  // title.textContent = `${winner} Wins!`;
-  // // Button
-  // const playAgainBtn = document.createElement('button');
-  // playAgainBtn.setAttribute('onclick', 'startGame()');
-  // playAgainBtn.textContent = 'Play Again';
-  // // Append
+  canvas.style.display = 'none';
+  // Container
+  gameOverEl.textContent = '';
+  gameOverEl.classList.add('game-over-container');
+  // Title
+  const title = document.createElement('h1');
+  title.textContent = `${winner} Wins!`;
+  // Button
+  const playAgainBtn = document.createElement('button');
+  playAgainBtn.setAttribute('onclick', 'startGame()');
+  playAgainBtn.textContent = 'Play Again';
+  // Append
+  gameOverEl.append(title, playAgainBtn);
+  body.appendChild(gameOverEl);
 }
 
 // Check If One Player Has Winning Score, If They Do, End Game
@@ -189,8 +192,7 @@ function gameOver() {
   if (playerScore === winningScore || computerScore === winningScore) {
     isGameOver = true;
     // Set Winner
-    let winner =
-      playerScore === winningScore ? `'You win the game` : `Computer wins`;
+    const winner = playerScore === winningScore ? `Player` : `Computer`;
     showGameOverEl(winner);
   }
 }
