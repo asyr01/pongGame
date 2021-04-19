@@ -11,7 +11,7 @@ canvas {
   z-index: 10;
 }
 
-.game-over-container {
+.container {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -26,6 +26,15 @@ canvas {
   justify-content: center;
   align-items: center;
   color: whitesmoke;
+  text-align: center;
+}
+
+input {
+  display: block;
+  margin-top: 5px;
+  padding: 5px 2px;
+  border-radius: 5px;
+  margin-bottom: 25px;
 }
 
 button {

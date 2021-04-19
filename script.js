@@ -7,7 +7,9 @@ const height = 700;
 const screenWidth = body.clientWidth;
 const canvasPosition = screenWidth / 2 - width / 2;
 const isMobile = window.matchMedia('(max-width: 600px)');
+const welcomeContainerEl = document.createElement('div');
 const gameOverEl = document.createElement('div');
+const playerInfo = document.createElement('div');
 
 // Paddle
 const paddleHeight = 10;
@@ -41,6 +43,7 @@ if (isMobile.matches) {
 }
 
 // Score
+let playerName;
 let playerScore = 0;
 let computerScore = 0;
 const winningScore = 5;
@@ -85,8 +88,7 @@ function createCanvas() {
   renderCanvas();
 }
 
-// Remove this
-createCanvas();
+showWelcomeEl();
 
 // Reset Ball to Center
 function ballReset() {
@@ -171,10 +173,10 @@ function computerAI() {
 
 function showGameOverEl(winner) {
   // Hide Canvas
-  canvas.hidden = 'true';
+  canvas.hidden = true;
   // Container
   gameOverEl.textContent = '';
-  gameOverEl.classList.add('game-over-container');
+  gameOverEl.classList.add('container');
   // Title
   const title = document.createElement('h1');
   title.textContent = `${winner} Wins!`;
@@ -187,12 +189,53 @@ function showGameOverEl(winner) {
   body.appendChild(gameOverEl);
 }
 
+function setName() {
+  playerName = document.getElementById('name-input').value;
+}
+
+function showWelcomeEl() {
+  // Hide Canvas
+  canvas.hidden = true;
+  // Container
+  welcomeContainerEl.textContent = '';
+  welcomeContainerEl.classList.add('container');
+  // Welcome
+  const welcomeText = document.createElement('h2');
+  welcomeText.textContent =
+    'Welcome to the most attractive pong game ever! (!) :)';
+  // Info
+  playerInfo.classList.add('container');
+  const playerNameLabel = document.createElement('label');
+  playerNameLabel.setAttribute('for', 'name');
+  playerNameLabel.textContent = 'What is your name ?';
+  const playerNameInput = document.createElement('input');
+  playerNameInput.setAttribute('type', 'text');
+  playerNameInput.setAttribute('onchange', 'setName()');
+  playerNameInput.id = 'name-input';
+
+  // Start Game Button
+  const startGameButton = document.createElement('button');
+  startGameButton.setAttribute('onclick', 'startGame()');
+  startGameButton.textContent = 'Start the Game';
+
+  // Append
+  playerNameLabel.appendChild(playerNameInput);
+  playerInfo.append(welcomeText, playerNameLabel, startGameButton);
+  welcomeContainerEl.appendChild(playerInfo);
+  body.appendChild(welcomeContainerEl);
+}
+
 // Check If One Player Has Winning Score, If They Do, End Game
 function gameOver() {
   if (playerScore === winningScore || computerScore === winningScore) {
     isGameOver = true;
     // Set Winner
-    const winner = playerScore === winningScore ? `Player` : `Computer`;
+    const winner =
+      playerScore === winningScore
+        ? playerName
+          ? `${playerName}`
+          : 'Player'
+        : 'Computer';
     showGameOverEl(winner);
   }
 }
@@ -213,6 +256,9 @@ function animate() {
 function startGame() {
   if (isGameOver && !isNewGame) {
     body.removeChild(gameOverEl);
+    canvas.hidden = false;
+  } else if (!isGameOver && !isNewGame) {
+    body.removeChild(welcomeContainerEl);
     canvas.hidden = false;
   }
   isGameOver = false;
